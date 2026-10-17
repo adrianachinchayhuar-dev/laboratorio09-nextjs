@@ -14,6 +14,11 @@ export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;
   const search = params.get("s");
   const id = params.get("i");
+  const type = params.get("type");
+  const page = params.get("page") ?? "1";
+  if (!id && ((type && !["movie", "series"].includes(type)) || !/^\d+$/.test(page) || Number(page) < 1 || Number(page) > 100)) {
+    return NextResponse.json({ Response: "False", Error: "Tipo o página inválidos" }, { status: 400 });
+  }
 
   if (!search && !id) {
     return NextResponse.json(
@@ -30,7 +35,9 @@ export async function GET(request: NextRequest) {
     omdbParams.set("i", id);
     omdbParams.set("plot", "full");
   } else if (search) {
-    omdbParams.set("s", search);
+    omdbParams.set("s", search.trim());
+    omdbParams.set("page", String(Number(page)));
+    if (type) omdbParams.set("type", type);
   }
 
   try {

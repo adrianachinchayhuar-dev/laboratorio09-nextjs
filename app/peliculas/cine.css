@@ -1,0 +1,79 @@
+/* Page atmosphere is intentionally scoped to Cine Explorer. Tailwind owns layout. */
+.cine-explorer {
+  color-scheme: dark;
+  background-color: #111827;
+  background-image:
+    radial-gradient(ellipse 80% 650px at 5% 180px, rgb(124 58 237 / 32%), transparent 78%),
+    radial-gradient(ellipse 65% 750px at 100% 520px, rgb(37 99 235 / 30%), transparent 80%),
+    radial-gradient(ellipse 85% 600px at 10% 47%, rgb(56 189 248 / 16%), transparent 75%),
+    radial-gradient(ellipse 80% 700px at 95% 68%, rgb(20 184 166 / 23%), transparent 78%),
+    radial-gradient(ellipse 65% 600px at 12% 95%, rgb(124 58 237 / 24%), transparent 80%),
+    linear-gradient(155deg, #1d204b 0%, #182441 30%, #132c3d 60%, #1e2449 85%, #152e3c 100%);
+}
+
+/* Translucent chrome lets the same continuous atmosphere reach the page edges. */
+.cine-explorer > header {
+  background-color: rgb(17 24 39 / 48%);
+}
+
+/* Each light pool fades to transparent at every edge, without a panel boundary.
+   Percentage sizing follows section height when CSR adds search results. */
+.cine-explorer #destacadas {
+  background-image: radial-gradient(ellipse closest-side at 45% 50%, rgb(49 46 129 / 25%), transparent);
+}
+.cine-explorer #seleccion {
+  background-image: radial-gradient(ellipse closest-side at 60% 50%, rgb(56 189 248 / 12%), transparent);
+}
+.cine-explorer #buscar {
+  background-image:
+    radial-gradient(ellipse closest-side at 15% 50%, rgb(124 58 237 / 22%), transparent),
+    radial-gradient(ellipse closest-side at 85% 50%, rgb(20 184 166 / 16%), transparent);
+}
+
+.cine-explorer :is(a, button, input):focus-visible {
+  outline: 2px solid #99f6e4;
+  outline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+  .cine-explorer {
+    background-image:
+      radial-gradient(ellipse 130% 750px at 0% 250px, rgb(124 58 237 / 30%), transparent 78%),
+      radial-gradient(ellipse 130% 900px at 100% 1100px, rgb(37 99 235 / 25%), transparent 80%),
+      radial-gradient(ellipse 150% 750px at 0% 52%, rgb(56 189 248 / 17%), transparent 80%),
+      radial-gradient(ellipse 140% 900px at 100% 75%, rgb(20 184 166 / 23%), transparent 78%),
+      radial-gradient(ellipse 130% 700px at 0% 100%, rgb(124 58 237 / 24%), transparent 80%),
+      linear-gradient(165deg, #1d204b 0%, #182441 30%, #132c3d 60%, #1e2449 85%, #152e3c 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cine-explorer *, .cine-explorer *::before, .cine-explorer *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Motion reveals supplement essential metadata; touch devices always show them. */
+.cine-explorer .ce-reveal {
+  opacity: 1;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+  .cine-explorer .group:not(:hover):not(:focus-within):not(:focus-visible) .ce-reveal {
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+  }
+}
+.cine-explorer #destacadas {
+  background-image: radial-gradient(ellipse closest-side at 45% 50%, rgb(124 58 237 / 18%), transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cine-explorer .ce-reveal { transition: none; }
+  .cine-explorer .group img { transform: none !important; }
+  .cine-explorer .group { transform: none !important; }
+}
+
+
